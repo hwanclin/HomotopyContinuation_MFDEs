@@ -145,11 +145,11 @@ Note that as $p = 0$, $H(.) = G(.)$. So, by letting p increase little by little,
     
 #### Step 2: Solve the Start System to obtain an initial solution.
 
-Since the Start System $G(.)$ is a regular ODE system, it can be solved easily with Python's BVP solver (**scipy.integrate.solve_bvp**) so that we can obtain an initial solution, $y(x)$ for $x in [0, tmax]$, where tmax is the chosen proxy for infinity in the semi-infinite horizon $[0,\infty)$
+Since the Start System $G(.)$ is a regular ODE system, it can be solved easily with Python's BVP solver (**scipy.integrate.solve_bvp**) so that we can obtain an initial solution, $y(x)$ for $x \in [0, tmax]$, where tmax is the chosen proxy for infinity in the semi-infinite horizon $[0,\infty)$
 
 #### Step 3: Enter the Homotopy-continuation loop.
 
- Using the initial solution $y(x)$ together with the pre-shape history, we can  form the aforementioned approximant function to parametrize $y(x-\tau)$ as $y\_lag$ and $y(x+\tau)$ as $y\_lead$ in the Target System $F(.)$. In so doing, we can treat the homotopy $H(.)$ as a regular ODE system. Then we can solve the homotopy with the same BVP solver again to obtain  an updated solution, which can be used to update the approximant. With the updated approximant, we can parametrize the lead and lag terms again to obtain an updated homotopy $H(.)$ and solve it again. 
+ Using the initial solution $y(x)$ together with the pre-shape history, we can  form the aforementioned approximant function to parametrize $y(x-\tau)$ as $y_{lag}$ and $y(x+\tau)$ as $y_{lead}$ in the Target System $F(.)$. In so doing, we can treat the homotopy $H(.)$ as a regular ODE system. Then we can solve the homotopy with the same BVP solver again to obtain  an updated solution, which can be used to update the approximant. With the updated approximant, we can parametrize the lead and lag terms again to obtain an updated homotopy $H(.)$ and solve it again. 
 
 As this process keeps going on, $p$ keeps increasing toward one. This recursive process allows us to solve and update the homotopic system agains and again until the homotopy has deformed into the Target System [equations (1) and (2)] at $p = 1$.
 
