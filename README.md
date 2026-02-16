@@ -11,9 +11,9 @@ The source file of main.py is the program's driver while the source file of FDEm
 
 Start System of ODEs: $\hspace{1.1cm}$ $G(t, y(t))$
 
-Target System of MFDEs: $\hspace{0.7cm}$ $F(t, y(t), y(t-\tau), y(t+\tau)),\,\,\,\tau>0$
+Target System of MFDEs: $\hspace{0.58cm}$ $F(t, y(t), y(t-\tau), y(t+\tau)),\,\,\,\tau>0$
 
-Homotopic System: $\hspace{1.45cm}$ $H(t, y(t), p),\,\,\,p\in [0,1]$
+Homotopic System: $\hspace{1.59cm}$ $H(t, y(t), p),\,\,\,p\in [0,1]$
 
 To run the Python program, you will need to download and place main.py (the driver) and FDEmodel.py (the class) in the same folder (directory). On the command line, enter **python main.py** and wait in an instant to see the iteration process and graphical output on the console: 
 
