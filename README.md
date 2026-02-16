@@ -11,9 +11,9 @@ The source file of main.py is the program's driver while the source file of FDEm
 
 Start System of ODEs: $\hspace{1.1cm}$ $G(t, y(t))$
 
-Target System of MFDEs: $\hspace{0.58cm}$ $F(t, y(t), y(t-\tau), y(t+\tau)),\,\,\,\tau>0$
+Target System of MFDEs: $\hspace{0.58cm}$ $F(t, y(t), y(t-\tau), y(t+\tau)),\hspace{0.2cm}\tau>0$
 
-Homotopic System: $\hspace{1.59cm}$ $H(t, y(t), p),\,\,\,p\in [0,1]$
+Homotopic System: $\hspace{1.59cm}$ $H(t, y(t), p),\hspace{0.2cm}p\in [0,1]$
 
 To run the Python program, you will need to download and place main.py (the driver) and FDEmodel.py (the class) in the same folder (directory). On the command line, enter **python main.py** and wait in an instant to see the iteration process and graphical output on the console: 
 
@@ -42,13 +42,13 @@ The Python program is designed to solve a mathematically complicated dynamical s
 
 $$
 \begin{equation}
-\dot{k}(t) = A  k(t-\tau)^\alpha - c(t) - \delta  k(t-\tau)\hspace{6cm}(1) 
+\dot{k}(t) = A  k(t-\tau)^\alpha - c(t) - \delta  k(t-\tau)\hspace{5cm}(1) 
 \end{equation}
 $$
 
 $$
 \begin{equation}
-\dot{c}(t) = \frac{1}{\sigma} c(t) \left( \left[A \alpha k(t)^{\alpha-1} - \delta\right]\left[\frac{c(t)}{c(t+\tau)}\right]^\sigma  e^{-\rho \tau} - \rho \right) \hspace{3cm}(2)
+\dot{c}(t) = \frac{1}{\sigma} c(t) \left( \left[A \alpha k(t)^{\alpha-1} - \delta\right]\left[\frac{c(t)}{c(t+\tau)}\right]^\sigma  e^{-\rho \tau} - \rho \right) \hspace{2cm}(2)
 \end{equation}
 $$
 
@@ -72,14 +72,15 @@ $\hspace{1cm}c(t) \rightarrow c_{ss}$ at $t \rightarrow \infty$
     
 In the present ($t = 0$):
 
-$\hspace{1cm}k(t) = k_0 > 0$ at $t = 0$
+$\hspace{1cm}k(t) = k_0 > 0$ at $t = 0$: predetermined
+
 $\hspace{1cm}c(t)$ at $t = 0:$ not predetermined 
  
 History in the pre-shape interval $[-\tau,0)$:
 
 $\hspace{1cm}k(t) = k_0 > 0$ at $t \in [-\tau, 0)$
 
-$\hspace{1cm}c(t) =$ not available data at $t \in [-\tau, 0)$
+$\hspace{1cm}c(t) =$ unknown at $t \in [-\tau, 0)$
 
 Model Parameters:
 
@@ -98,20 +99,20 @@ $\hspace{1cm}\tau$: the delay/advance parameter $(\tau>0)$
 
 ### D. Three Dynamical Systems
 
-Equations (1)-(2) represent the Target System (MFDEs), denoted by $F(.)$, where equation (1) is a "delay differential equation" (DDE) due to the delay term, $k(t-\tau)$, while equation (2) is an "advance differential equation" (ADE) due to the advance term, $c(t+\tau)$. 
+Equations (1)-(2) represent the Target System (MFDEs), denoted by $F(.)$, where equation (1) is a "delay differential equation" (DDE) due to the delay term, $k(t-\tau)$ and equation (2) is an "advance differential equation" (ADE) due to the advance term, $c(t+\tau)$. 
 
 If parameter $\tau$ is set equal to zero, equations (1)-(2) reduce
 to a system of two ordinary differential equations (ODEs), denoted by $G(.)$, which is called the Start System in the Python program. 
 
-We form the linear homotopic system H(.):
+We form the linear homotopic system $H(.)$:
 
 $$
 \begin{equation}
-H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau))\hspace{2cm}(3)
+H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau))\hspace{1cm}(3)
 \end{equation}
 $$
 
-where $p\in[0,1]$ is the continuation parameter. 
+where $p\in[0,1]$ is the continuation parameter that allows the Homotopy $H(.)$ to deform into Target System $F(.)$ by increasing the value of $p$ incrementally toward one. 
 
 The MFDE system presents a complicated boundary value problem (BVP) because
 the system's current state is subject to the "non-local" states in history and the future. 
@@ -120,8 +121,8 @@ the system's current state is subject to the "non-local" states in history and t
 
 The Python program uses a homotopic continuation method to solve the MFDE
 system. This numerical method, proposed and demonstrated in Lin (2018), is
-to solve the MFDE system (1)-(2) by solving a functional sequence of 
-$p$-constructed homotopic systems with $p \in [0, 1]$. 
+to solve the MFDE system (1)-(2) by solving a functional sequence of the
+$p$-constructed homotopic systems with $p \in [0, 1]$ given by equation (3).
     
 All these $p$-constructed homotopic systems, or the "Homotopy" for brevity, 
 are formed by ODEs since we design an approximant (provided in the Python class) to parametrize the non-local lag and lead terms that exist in the MFDE 
@@ -131,21 +132,21 @@ The homotopic-continuation algorithm requires three major steps:
    
 #### Step 1: Construct the homotopy.
 
-We form a convex combination of the Start System  $G(x, y(x))$ and the Target System $F(x, y(x), y_{lag}, y_{lead})$:
+We form a convex combination of Start System  $G(x, y(x))$ and Target System $F(x, y(x), y_{lag}, y_{lead})$:
      
 $$
 \begin{equation}
-H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y_{lag}, y_{lead}) \hspace{2cm}(3')            
+H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y_{lag}, y_{lead}) \hspace{1cm}(3')            
 \end{equation}
 $$                                                                             
 
-where $x$ is the independent time variable ($t$); $y = [k, c]$ is a vector of two dependent variables (k, c); $p \in [0, 1]$ is the homotopic continuation parameter; and $y_{lag}$ and $y_{lead}$ are used to parametrize those non-local lag and lead terms in equation (3') based on an approximant designed in the Python class.                  
+where $x$ is the independent time variable ($t$); $y = [k, c]$ is a vector of two dependent variables (k, c); $p \in [0, 1]$ is the homotopic continuation parameter; and $y_{lag}$ and $y_{lead}$ are used to parametrize those non-local lag and lead terms in equation (3) based on an approximant designed in the Python class.                  
                                                                               
 Note that as $p = 0$, $H(.) = G(.)$. So, by letting p increase little by little, the homotopy $H(.)$ can finally deform into the Target System $F(.)$ at $p = 1$.
     
 #### Step 2: Solve the Start System to obtain an initial solution.
 
-Since the Start System $G(.)$ is a regular ODE system, it can be solved easily with Python's BVP solver (**scipy.integrate.solve_bvp**) so that we can obtain an initial solution, $y(x)$ for $x \in [0, tmax]$, where tmax is the chosen proxy for infinity in the semi-infinite horizon $[0,\infty)$
+Since the Start System $G(.)$ is a regular ODE system, it can be solved easily with Python's BVP solver (**scipy.integrate.solve_bvp**) so that we can obtain an initial solution, $y(x)$ for $x \in [0, t_{max}]$, where $t_{max}$ is the chosen proxy for infinity in the semi-infinite horizon $[0,\infty)$
 
 #### Step 3: Enter the Homotopy-continuation loop.
 
@@ -165,6 +166,6 @@ https://doi.org/10.1007/s10614-016-9597-9
 
 ### G. Author:
    
-Hwan C. Lin, Department of Economics, UNC-Charlotte
+Hwan C. Lin, Professor of Economics, UNC-Charlotte\
 Email:  hwlin@charlotte.edu; hwanlin@gmail.com\
 Date:   January 15, 2026
