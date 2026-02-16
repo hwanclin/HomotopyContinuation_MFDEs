@@ -107,7 +107,7 @@ We form the linear homotopic system H(.):
 
 $$
 \begin{equation}
-H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau))\hspace{3cm}(3)
+H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau))\hspace{2cm}(3)
 \end{equation}
 $$
 
@@ -135,7 +135,7 @@ We form a convex combination of the Start System  $G(x, y(x))$ and the Target Sy
      
 $$
 \begin{equation}
-H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y\_lag, y\_lead) \hspace{3cm}(3')            
+H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y\_lag, y\_lead) \hspace{2cm}(3')            
 \end{equation}
 $$                                                                             
 
@@ -149,9 +149,9 @@ Since the Start System $G(.)$ is a regular ODE system, it can be solved easily w
 
 #### Step 3: Enter the Homotopy-continuation loop.
 
- Using the initial solution $y(x)$ together with the pre-shape history, we can  form the aforementioned approximant function to parametrize $y(x-\tau)$ as $y\_lag$ and $y(x+\tau)$ as $y\_lead$ in the Target System $F(.)$. In so doing, we can treat the homotopy $H(.)$ as a regular ODE system. Then we can solve the homotopy with the same BVP solver again to obtain  an updated solution, which can be used to update the approximant. With the updated approximant, we can parametrize the lead and lag terms again to obtain an updated homotopy $H(.)$ and solve it again. As this process keeps going on, $p$ keeps increasing toward one. This recursive process allows us to solve and update the homotopic system agains and again until the homotopy has deformed into the Target System [equations (1) and (2)] at $p = 1$.
+ Using the initial solution $y(x)$ together with the pre-shape history, we can  form the aforementioned approximant function to parametrize $y(x-\tau)$ as $y\_lag$ and $y(x+\tau)$ as $y\_lead$ in the Target System $F(.)$. In so doing, we can treat the homotopy $H(.)$ as a regular ODE system. Then we can solve the homotopy with the same BVP solver again to obtain  an updated solution, which can be used to update the approximant. With the updated approximant, we can parametrize the lead and lag terms again to obtain an updated homotopy $H(.)$ and solve it again. 
 
-
+As this process keeps going on, $p$ keeps increasing toward one. This recursive process allows us to solve and update the homotopic system agains and again until the homotopy has deformed into the Target System [equations (1) and (2)] at $p = 1$.
 
 ### F. Reference: 
 
