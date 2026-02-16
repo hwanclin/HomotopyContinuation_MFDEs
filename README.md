@@ -41,11 +41,17 @@ This Python program is licensed under the [MIT License](LICENSE).
 The Python program is designed to solve a mathematically complicated dynamical system, denoted by the Target System F(.), formed by two mixed-type functional differential equations (MFDEs) based on a neoclassical growth model that features the element of  "Time-to-Build" capital. The Target System is explicitly given below: 
 
 $$
-\begin{aligned}
-\dot{k}(t) &= A  k(t-\tau)^\alpha - c(t) - \delta  k(t-\tau) \tag{1} \\[8pt]
-\dot{c}(t) &= \frac{1}{\sigma} c(t) \left( \left[A \alpha k(t)^{\alpha-1} - \delta\right]\left[\frac{c(t)}{c(t+\tau)}\right]^\sigma  e^{-\rho \tau} - \rho \right) \tag{2}
-\end{aligned}
+\begin{equation}
+\dot{k}(t) = A  k(t-\tau)^\alpha - c(t) - \delta  k(t-\tau)\hspace{6cm}(1) 
+\end{equation}
 $$
+
+$$
+\begin{equation}
+\dot{c}(t) = \frac{1}{\sigma} c(t) \left( \left[A \alpha k(t)^{\alpha-1} - \delta\right]\left[\frac{c(t)}{c(t+\tau)}\right]^\sigma  e^{-\rho \tau} - \rho \right) \hspace{3cm}(2)
+\end{equation}
+$$
+
 where $\dot{k}(t)\equiv\frac{dk(t)}{dt}$ and $\dot{c}(t)\equiv\frac{dc(t)}{dt}$.
                             
 Independent variable: 
@@ -100,8 +106,11 @@ to a system of two ordinary differential equations (ODEs), denoted by $G(.)$, wh
 We form the linear homotopic system H(.):
 
 $$
-H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau)) \tag{3}
+\begin{equation}
+H(t, y(t), p) = (1-p)G(t, y(t)) + p F(t, y(t), y(t-\tau), y(t+\tau))\hspace{3cm}(3)
+\end{equation}
 $$
+
 where $p\in[0,1]$ is the continuation parameter. 
 
 The MFDE system presents a complicated boundary value problem (BVP) because
@@ -124,7 +133,10 @@ The homotopic-continuation algorithm requires three major steps:
 
 We form a convex combination of the Start System  $G(x, y(x))$ and the Target System $F(x, y(x), y\_lag, y\_lead)$:
      
-$$                                                                              H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y\_lag, y\_lead) \tag{3'}            
+$$
+\begin{equation}
+H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y\_lag, y\_lead) \hspace{3cm}(3')            
+\end{equation}
 $$                                                                             
 
 where $x$ is the independent time variable ($t$); $y = [k, c]$ is a vector of two dependent variables (k, c); $p \in [0, 1]$ is the homotopic continuation parameter; and $y\_lag$ and $y\_lead$ are used to parametrize those non-local lag and lead terms in equation (3') based on an approximant designed in the Python class.                  
