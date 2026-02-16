@@ -41,10 +41,10 @@ This Python program is licensed under the [MIT License](LICENSE).
 The Python program is designed to solve a mathematically complicated dynamical system, denoted by the Target System F(.), formed by two mixed-type functional differential equations (MFDEs) based on a neoclassical growth model that features the element of  "Time-to-Build" capital. The Target System is explicitly given below: 
 
 $$
-\begin{align}
+\begin{aligned}
 \dot{k}(t) &= A  k(t-\tau)^\alpha - c(t) - \delta  k(t-\tau) \tag{1} \\[8pt]
 \dot{c}(t) &= \frac{1}{\sigma} c(t) \left( \left[A \alpha k(t)^{\alpha-1} - \delta\right]\left[\frac{c(t)}{c(t+\tau)}\right]^\sigma  e^{-\rho \tau} - \rho \right) \tag{2}
-\end{align}
+\end{aligned}
 $$
 where $\dot{k}(t)\equiv\frac{dk(t)}{dt}$ and $\dot{c}(t)\equiv\frac{dc(t)}{dt}$.
                             
