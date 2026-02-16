@@ -131,15 +131,15 @@ The homotopic-continuation algorithm requires three major steps:
    
 #### Step 1: Construct the homotopy.
 
-We form a convex combination of the Start System  $G(x, y(x))$ and the Target System $F(x, y(x), y\_lag, y\_lead)$:
+We form a convex combination of the Start System  $G(x, y(x))$ and the Target System $F(x, y(x), y_{lag}, y_{lead})$:
      
 $$
 \begin{equation}
-H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y\_lag, y\_lead) \hspace{2cm}(3')            
+H(x, y(x), p) = (1-p) G(x, y(x)) + p F(x, y(x), y_{lag}, y_{lead}) \hspace{2cm}(3')            
 \end{equation}
 $$                                                                             
 
-where $x$ is the independent time variable ($t$); $y = [k, c]$ is a vector of two dependent variables (k, c); $p \in [0, 1]$ is the homotopic continuation parameter; and $y\_lag$ and $y\_lead$ are used to parametrize those non-local lag and lead terms in equation (3') based on an approximant designed in the Python class.                  
+where $x$ is the independent time variable ($t$); $y = [k, c]$ is a vector of two dependent variables (k, c); $p \in [0, 1]$ is the homotopic continuation parameter; and $y_{lag}$ and $y_{lead}$ are used to parametrize those non-local lag and lead terms in equation (3') based on an approximant designed in the Python class.                  
                                                                               
 Note that as $p = 0$, $H(.) = G(.)$. So, by letting p increase little by little, the homotopy $H(.)$ can finally deform into the Target System $F(.)$ at $p = 1$.
     
